@@ -61,29 +61,29 @@ As a user, I can view the generated images and descriptions, and then download a
 ### Tech Stack
 
 **Frontend:**
-React for building the user interface
-JavaScript for client-side scripting
-Axios for making HTTP requests to the backend
-React-router for handling client-side routing and navigation
+1. React for building the user interface.
+2. JavaScript for client-side scripting.
+3. Axios for making HTTP requests to the backend.
+4. React-router for handling client-side routing and navigation.
 
 **Backend:**
-Node.js with Express for handling server-side logic and API requests
-Axios for making HTTP requests to GPT API
-MySQL for storing user data and preferences
-Knex.js for building SQL queries and managing database migrations
-[openai](https://github.com/openai/openai-node) npm client package
-Python with genanki for generating Anki packages (.apkg files) based on user input
+1. Node.js with Express for handling server-side logic and API requests
+2. Axios for making HTTP requests to GPT API
+3. MySQL for storing user data and preferences
+4. Knex.js for building SQL queries and managing database migrations
+5. [openai](https://github.com/openai/openai-node) npm client package
+6. Python with genanki for generating Anki packages (.apkg files) based on user input
 
 **Authentication:**
-bcrypt for hashing passwords 
-JSON Web Tokens (JWT) for managing user sessions and protecting routes
-(OR... Passport.js for managing authentication strategies)
+1. bcrypt for hashing passwords 
+2. JSON Web Tokens (JWT) for managing user sessions and protecting routes
+3. (OR... Passport.js for managing authentication strategies)
 
 
 ### APIs
 
-OpenAI GPT-4 API: For generating mnemonic descriptions based on user input.
-DALL-E API (Future integration): For generating images to accompany mnemonic descriptions.
+1. OpenAI GPT-4 API: For generating mnemonic descriptions based on user input.
+2. DALL-E API (Future integration): For generating images to accompany mnemonic descriptions.
 
 ### Sitemap
 
