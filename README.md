@@ -74,7 +74,7 @@ As an admin I want to view all user profiles, edit and delete profiles.
 - Axios for making HTTP requests to GPT API
 - MySQL for storing user data and preferences
 - Knex.js for building SQL queries and managing database migrations
-[openai](https://github.com/openai/openai-node) npm client package
+- [openai](https://github.com/openai/openai-node) npm client package
 
 **Authentication:**
 -  Passport.js for managing authentication strategies. Users will log in using their Google accounts.
