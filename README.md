@@ -63,27 +63,27 @@ As an admin I want to view all user profiles, edit and delete profiles.
 ### Tech Stack
 
 **Frontend:**
-React for building the user interface
-JavaScript for client-side scripting
-Axios for making HTTP requests to the backend
-React-router for handling client-side routing and navigation
+
+- React for building the user interface
+- JavaScript for client-side scripting
+- Axios for making HTTP requests to the backend
+- React-router for handling client-side routing and navigation
 
 **Backend:**
-Node.js with Express for handling server-side logic and API requests
-Axios for making HTTP requests to GPT API
-MySQL for storing user data and preferences
-Knex.js for building SQL queries and managing database migrations
+- Node.js with Express for handling server-side logic and API requests
+- Axios for making HTTP requests to GPT API
+- MySQL for storing user data and preferences
+- Knex.js for building SQL queries and managing database migrations
 [openai](https://github.com/openai/openai-node) npm client package
-Python with genanki for generating Anki packages (.apkg files) based on user input
 
 **Authentication:**
-Passport.js for managing authentication strategies. Users will log in using their Google accounts.
+-  Passport.js for managing authentication strategies. Users will log in using their Google accounts.
 
 
 ### APIs
 
 OpenAI GPT-4 API: For generating mnemonic descriptions based on user input.
-DALL-E API (Future integration): For generating images to accompany mnemonic descriptions.
+DALL-E API: For generating images to accompany mnemonic descriptions.
 
 ### Sitemap
 
