@@ -20,7 +20,7 @@ Mnema uses mnemonic techniques to create vivid visual images, which significantl
 
 Why it works:
 
-**Visualization:** Vivid and detailed images stay in memory longer. Our brain is naturally tuned to process and store visual information, with visual images activating more areas associated with memory.
+**Visualization:** Vivid and detailed images stay in memory longer. Our brain is naturally tuned to process and store visual information, with visual images activating more memory-associated areas.
 
 **Associations:** Our memory functions as a network, where new elements are anchored to existing connections. By linking new words to familiar knowledge, we create strong associative connections in the brain.
 
@@ -37,11 +37,9 @@ Language learners:
 
 ### Features
 
-As a user, I want to understand the core mission of Mnema and start the process of learning quickly. Two options: "Get started" for new users and "I already have an account" for returning users.
+As a user, I want to understand the core mission of Mnema and start the process of learning quickly. 
 
-As a new user, I want to create an account by providing my email and password.
-
-As a returning user, I want to log in to my account using my email and password.
+As a new user, I want to log in using my Google account.
 
 As a user, I want to choose the language I want to learn.
 
@@ -51,47 +49,51 @@ As a user, I want to specify my interests to personalize the learning experience
 
 As a user, I want to choose or enter my professions to further customize the learning content.
 
+As a user, I want to have ability to change my native and target languages, my interests and professions.
+
 As a user, I want to input words that I want to learn and generate translations, mnemonic descriptions and images for them.
 
 As a user, I want to review the table with generated words, translations, and mnemonic descriptions. If I am not satisfied with a description, I can click a button to regenerate it. Once all descriptions are satisfactory, I can click "Create Images."
 
 As a user, I can view the generated images and descriptions, and then download an Anki word list to continue learning offline.
 
+As an admin I want to view all user profiles, edit and delete profiles.
+
 
 ### Tech Stack
 
 **Frontend:**
-1. React for building the user interface.
-2. JavaScript for client-side scripting.
-3. Axios for making HTTP requests to the backend.
-4. React-router for handling client-side routing and navigation.
+React for building the user interface
+JavaScript for client-side scripting
+Axios for making HTTP requests to the backend
+React-router for handling client-side routing and navigation
 
 **Backend:**
-1. Node.js with Express for handling server-side logic and API requests
-2. Axios for making HTTP requests to GPT API
-3. MySQL for storing user data and preferences
-4. Knex.js for building SQL queries and managing database migrations
-5. [openai](https://github.com/openai/openai-node) npm client package
-6. Python with genanki for generating Anki packages (.apkg files) based on user input
+Node.js with Express for handling server-side logic and API requests
+Axios for making HTTP requests to GPT API
+MySQL for storing user data and preferences
+Knex.js for building SQL queries and managing database migrations
+[openai](https://github.com/openai/openai-node) npm client package
+Python with genanki for generating Anki packages (.apkg files) based on user input
 
 **Authentication:**
-1. bcrypt for hashing passwords 
-2. JSON Web Tokens (JWT) for managing user sessions and protecting routes
-3. (OR... Passport.js for managing authentication strategies)
+Passport.js for managing authentication strategies. Users will log in using their Google accounts.
 
 
 ### APIs
 
-1. OpenAI GPT-4 API: For generating mnemonic descriptions based on user input.
-2. DALL-E API (Future integration): For generating images to accompany mnemonic descriptions.
+OpenAI GPT-4 API: For generating mnemonic descriptions based on user input.
+DALL-E API (Future integration): For generating images to accompany mnemonic descriptions.
 
 ### Sitemap
 
 Home Page: Introduction and navigation options.
 
-Registration Page: User registration.
+Login Page: The user is redirected to Google for authorization, after which returns to the site.
 
-Login Page: User login.
+User Profile Page: Display Name and Email. Ability to change their native and target languages, their interests and professions.
+
+Admin Page: Manage User Profiles: view all profiles, edit and delete profiles.
 
 Language Selection Page: Choose the language to learn.
 
@@ -107,35 +109,37 @@ Results Page: Display generated words, translations, and mnemonics. Users can re
 
 Visuals & Download Page: Display generated images, mnemonics, and provide a download option for the Anki word list.
 
+# Data
+
+<img width="1000" alt="sql_mnema" src="https://github.com/user-attachments/assets/a07807f1-8b98-49a5-b9a1-a9c90062b7eb">
+
+
 ### Endpoints
 
-1. **User Registration:**
+1. **User Login:**
 
-- **Method:** POST
-- **URL:** `/api/register`
-- **Request Body:** `{ email: string, password: string }`
-- **Response:**
+- **Method:** GET
+- **URL:** `/auth/google`
+- **Response:** Redirects to the Google authorization page.
 
-```
-{
-  "status": "success",
-  "errors": []
-}
+2. **Google Callback:**
 
-```
-
-2. **User Login:**
-
-- **Method:** POST
-- **URL:** `/api/login`
-- **Request Body:** `{ email: string, password: string }`
+- **Method:** GET
+- **URL:** `/auth/google/callback`
+- **Description:** This endpoint will handle the callback from Google after successful authorization. After successful login through Google, the user will be redirected back to the site with an active session.
 - **Response:**
 
 ```
 {
   "status": "success",
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "1234",
+    "name": "John Doe",
+    "email": "johndoe@gmail.com"
+  }
 }
+
 
 ```
 
@@ -269,27 +273,77 @@ For image generation will be used [openai](https://github.com/openai/openai-node
 Example of usage: https://platform.openai.com/docs/guides/images/image-generation.
 
 
-10. **Download File:**
+**Additional Endpoints for Profile Management:**
 
-- Method: GET
-- URL: `/api/download`
-- Query Parameters: `{}`
-- Response:
+10. **User Profile:**
+
+- **Method:** GET
+- **URL:** `/api/users/:id/profile`
+- **Response:**
 ```
 {
-  "url": "https://example.com/path/to/my/file1.apkg"
+  "user": {
+    "id": "1234",
+    "name": "John Doe",
+    "email": "johndoe@gmail.com",
+    "target_language": "French",
+    "primary_language": "English",
+    "interests": ["soccer"],
+    "professions": ["soccer player"]
+  },
+  "status": "success"
 }
+
 ```
+
+11. **Admin Profile Management:**
+
+- **Method:** GET
+- **URL:** `/api/admin/users`
+- **Response:**
+```
+{
+  "users": [
+    {
+      "id": "1234",
+      "name": "John Doe",
+      "email": "johndoe@gmail.com"
+    },
+    {
+      "id": "5678",
+      "name": "Jane Smith",
+      "email": "janesmith@gmail.com"
+    }
+  ],
+  "status": "success"
+}
+
+```
+
+- **Method:** DELETE
+- **URL:** `/api/admin/users/:id`
+- **Description:** Allows the admin to delete a user profile.
+-  **Response:**
+```
+{
+  "status": "success",
+  "message": "User profile deleted successfully."
+}
+
+```
+
 
 ### Auth
 
-- **JWT Authentication**:
-    - Secure user login with JSON Web Tokens (JWT).
-    - Store JWT in local storage and include in API requests for secure access.
-    - The token will be deleted when user is logged out.
+- Use Passport.js to handle authentication via Google OAuth.
+- When a user logs in, they will be redirected to Google for authentication.
+- Upon successful authentication, Google will return a token that Passport.js will use to create or update the user session.
+- User information will be stored in the session, and no manual token management (like JWT) will be required.
 
 
 ### Roadmap
+
+Week 1:
 
 **1. Create Client project**. Set up the React project with initial routes and pages. Use React Router for navigation.
 
@@ -299,11 +353,17 @@ Example of usage: https://platform.openai.com/docs/guides/images/image-generatio
 
 **4. Seed Database**. Populate the MySQL database with sample data (languages, interests, professions) using Knex.js.
 
-**5. Deploy Client and Server**. Deploy the React frontend and Express backend to production (Heroku?).
+Week 2:
 
-**6. Implement User Registration**. Build the registration page with React. Create the `POST /api/register` endpoint in Express. 
+**5. Deploy Client and Server**. Deploy the React frontend and Express backend to production (Heroku).
 
-**7. Implement User Login**. Build the login page with React.  Create the `POST /api/login` endpoint in Express. 
+**6. Implement Google OAuth Login.** Create a button on the login page to redirect to Google OAuth. Implement the `/auth/google` route to handle the OAuth flow. Implement the `/auth/google/callback` route to handle the callback and user session creation.
+
+**7. Implement User Profile and Admin Profile Management.** Build the user profile page, allowing users to view and edit their profile (name, email), update their language settings, interests, and professions. Implement the corresponding endpoints in Express.
+
+Build the admin dashboard, allowing the admin to view, edit, and delete user profiles. Create the corresponding endpoints in Express to support these admin functionalities.
+
+Week 3:
 
 **8. Implement Language Selection**. Create pages for selecting target and native languages using React. Set up `POST /api/settings` endpoints in Express.
 
@@ -317,16 +377,21 @@ Example of usage: https://platform.openai.com/docs/guides/images/image-generatio
 
 **13. Build Results Page**. Create a page in React to display mnemonic descriptions with options to regenerate. Implement functionality to confirm descriptions and create images.
 
-**14. Build Visuals & Download Page**. Create a page in React to display images and mnemonic descriptions. Use Python with `genanki` to generate Anki packages (.csv/.apkg files). Create the `GET /api/download` endpoint in Express.
+**14. Build Visuals Page**. Create a page in React to display images and mnemonic descriptions. 
 
-**15. Implement JWT Authentication**. Add JWT authentication to protect routes after core features are implemented.  Update backend to verify JWT tokens. Manage sessions in React using localStorage.
-
-**16. Fix Bugs and Optimize**. Identify and fix bugs, optimizing performance across the React frontend and Express backend.
+**15. Fix Bugs and Optimize**. Identify and fix bugs, optimizing performance across the React frontend and Express backend.
 
 ## Nice-to-haves
 
-**Audio Pronunciation**: Add audio pronunciation for each word in the user's deck. This can be done by integrating a text-to-speech API or using pre-recorded audio files.
+**Add Download functionality**. Use Python with `genanki` to generate Anki packages (.csv/.apkg files). Create the `GET /api/download` endpoint in Express.
 
-**Creating and storing custom decks by the user.**
+**Creating and storing a few custom decks by the user.**
 
 **Pre-built Decks**: Provide users with ready-made decks of flashcards on specific themes (e.g., travel, food, basic phrases). This allows users to start learning immediately without waiting for image generation.
+
+**Audio Pronunciation**: Add audio pronunciation for each word in the user's deck. This can be done by integrating a text-to-speech API or using pre-recorded audio files.
+
+
+# Mockups
+
+![image](https://github.com/user-attachments/assets/01841302-783d-4f86-8015-2b7bc36f571f)
