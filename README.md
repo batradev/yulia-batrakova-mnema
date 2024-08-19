@@ -349,7 +349,7 @@ Week 1:
 
 **2. Create Server project**. Set up the Express server with basic routes. Use Node.js with Express for server-side logic and API handling.
 
-**3. Set Up Database Migrations**. Define the database schema using Knex.js to create the necessary tables in MySQL: users, interests, professions, words, mnemonics, images, users_words.
+**3. Set Up Database Migrations**. Define the database schema using Knex.js to create the necessary tables in MySQL: users, interests, professions, words, users_words.
 
 **4. Seed Database**. Populate the MySQL database with sample data (languages, interests, professions) using Knex.js.
 
