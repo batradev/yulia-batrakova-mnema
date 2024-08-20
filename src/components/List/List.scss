@@ -1,0 +1,7 @@
+@use '../../styles/partials/global' as *;
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: to-rem(10);
+  }
