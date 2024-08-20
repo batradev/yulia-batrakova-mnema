@@ -1,0 +1,19 @@
+@use '../../styles/partials/global' as *;
+
+.text-gradient {
+    @include logo-style;
+    padding-left: 40px;
+    width: 30%;
+    background: $gradient-color;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .welcome-text {
+    padding-left: 40px;
+    width: 30%;
+    @include h1-style;
+    color: $dark-blue;
+    background-color: $light-grey;
+  }

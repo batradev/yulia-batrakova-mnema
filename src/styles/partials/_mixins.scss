@@ -1,0 +1,129 @@
+@use "./variables" as *;
+@use "./functions" as *;
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+// Mixins for typography
+@mixin nunito-regular {
+  font-family: $font-family-base;
+  font-weight: $font-weight-regular;
+  font-style: normal;
+}
+
+@mixin nunito-semibold {
+  font-family: $font-family-base;
+  font-weight: $font-weight-semibold;
+  font-style: normal;
+}
+
+@mixin nunito-bold {
+    font-family: $font-family-base;
+    font-weight: $font-weight-bold;
+    font-style: bold;
+  }
+
+@mixin logo-style {
+  font-size: $logo-font-size;
+  @include nunito-bold;
+}
+
+@mixin h1-style {
+  font-size: $h1-font-size;
+  line-height: $h1-line-height;
+  @include nunito-semibold;
+}
+
+@mixin h2-style {
+  font-size: $h2-font-size;
+  line-height: $h2-line-height;
+  @include nunito-semibold;
+}
+
+@mixin h3-style {
+  font-size: $h3-font-size;
+  line-height: $h3-line-height;
+  @include nunito-semibold;
+}
+
+@mixin h4-style {
+  font-size: $h4-font-size;
+  line-height: $h4-line-height;
+  @include nunito-regular;
+}
+
+@mixin p1-style {
+  font-size: $p1-font-size;
+  line-height: $p1-line-height;
+  @include nunito-regular;
+}
+
+@mixin p2-style {
+  font-size: $p2-font-size;
+  line-height: $p2-line-height;
+  @include nunito-regular;
+}
+
+@mixin p3-style {
+  font-size: $p3-font-size;
+  line-height: $p3-line-height;
+  @include nunito-regular;
+}
+
+// Mobile styles
+@mixin m-h1-style {
+  font-size: $m-h1-font-size;
+  line-height: $m-h1-line-height;
+  @include nunito-semibold;
+}
+
+@mixin m-h2-style {
+  font-size: $m-h2-font-size;
+  line-height: $m-h2-line-height;
+  @include nunito-semibold;
+}
+
+@mixin m-h3-style {
+  font-size: $m-h3-font-size;
+  line-height: $m-h3-line-height;
+  @include nunito-semibold;
+}
+
+@mixin m-h4-style {
+  font-size: $m-h4-font-size;
+  line-height: $m-h4-line-height;
+  @include nunito-regular;
+}
+
+@mixin m-p1-style {
+  font-size: $m-p1-font-size;
+  line-height: $m-p1-line-height;
+  @include nunito-regular;
+}
+
+@mixin m-p2-style {
+  font-size: $m-p2-font-size;
+  line-height: $m-p2-line-height;
+  @include nunito-regular;
+}
+
+@mixin m-p3-style {
+  font-size: $m-p3-font-size;
+  line-height: $m-p3-line-height;
+  @include nunito-regular;
+}
