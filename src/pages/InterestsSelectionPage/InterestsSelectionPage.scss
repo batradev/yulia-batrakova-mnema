@@ -1,0 +1,45 @@
+@use '../../styles/partials/global' as *;
+
+.interests-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .interest-tag {
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .interest-tag.selected {
+    background-color: #b94dcc;
+    color: white;
+  }
+  
+  .interest-tag:hover {
+    background-color: #c0c0c0;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #b94dcc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #388e3c;
+  }
+  
