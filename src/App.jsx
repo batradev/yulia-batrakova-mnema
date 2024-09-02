@@ -14,6 +14,7 @@ import DeckAdditionPage from "./pages/DeckAdditionPage/DeckAdditionPage";
 import ResultsPage from "./pages/ResultsPage/ResultsPage";
 import VisualsPage from "./pages/VisualsPage/VisualsPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
+import WordsAdditionPage from "./pages/WordsAdditionPage/WordsAdditionPage";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
               element={<ProfessionSelectionPage />}
             />
             <Route path="/deck-addition" element={<DeckAdditionPage />} />
+            <Route path="/words-addition" element={<WordsAdditionPage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/visuals" element={<VisualsPage />} />
           </Routes>
