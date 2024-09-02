@@ -22,16 +22,28 @@ function App() {
         {/* <Header /> */}
         <main className="app__main-content">
           <Routes>
-          <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/user-profile" element={<UserProfilePage />} />
             <Route path="/admin" element={<AdminPage />} />
-            <Route path="/language-selection" element={<LanguageSelectionPage />} />
-            <Route path="/native-language-selection" element={<NativeLanguageSelectionPage />} />
-            <Route path="/interests-selection" element={<InterestsSelectionPage />} />
-            <Route path="/profession-selection" element={<ProfessionSelectionPage />} />
-            <Route path="/deck-addition" element={<DeckAdditionPage />} /> 
+            <Route
+              path="/language-selection"
+              element={<LanguageSelectionPage />}
+            />
+            <Route
+              path="/native-language-selection"
+              element={<NativeLanguageSelectionPage />}
+            />
+            <Route
+              path="/interests-selection"
+              element={<InterestsSelectionPage />}
+            />
+            <Route
+              path="/profession-selection"
+              element={<ProfessionSelectionPage />}
+            />
+            <Route path="/deck-addition" element={<DeckAdditionPage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/visuals" element={<VisualsPage />} />
           </Routes>
