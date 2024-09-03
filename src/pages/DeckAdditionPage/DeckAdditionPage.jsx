@@ -43,7 +43,7 @@ function DeckAdditionPage() {
       return; 
     }
     try {
-      await axios.post(
+      const response = await axios.post(
         'https://localhost:8080/api/decks',
         {
           name: deckName,
@@ -54,7 +54,8 @@ function DeckAdditionPage() {
           withCredentials: true,
         }
       );
-      navigate('/words-addition');
+      const deckId = response.data.deckId;
+      navigate(`/decks/${deckId}/words-addition`);
     } catch (error) {
       if (error.response && error.response.data.error) {
         setErrorMessage(error.response.data.error); 
