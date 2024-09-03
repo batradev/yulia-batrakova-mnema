@@ -45,8 +45,8 @@ function App() {
               element={<ProfessionSelectionPage />}
             />
             <Route path="/deck-addition" element={<DeckAdditionPage />} />
-            <Route path="/words-addition" element={<WordsAdditionPage />} />
-            <Route path="/results" element={<ResultsPage />} />
+            <Route path="/decks/:deckId/words-addition" element={<WordsAdditionPage />} />
+            <Route path="/decks/:deckId/results" element={<ResultsPage />} />
             <Route path="/visuals" element={<VisualsPage />} />
           </Routes>
         </main>
