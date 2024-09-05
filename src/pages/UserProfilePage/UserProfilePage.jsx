@@ -7,8 +7,6 @@ function UserProfilePage() {
   const userOptions = {
     name: "John Doe",
     email: "john.doe@example.com",
-    primaryLanguage: ["English", "English", "Spanish", "French", "English", "Spanish", "French"],
-    targetLanguage: ["Spanish", "English", "English", "Spanish", "French", "English", "Spanish", "French", "English", "English", "Spanish", "French", "English", "Spanish", "French"],
     interests: ["Reading", "Writing", "Drawing", "Reading", "Writing", "Drawing"],
     professions: ["Developer", "Designer", "Developer", "Designer", "Developer", "Designer",],
   };
@@ -26,8 +24,6 @@ function UserProfilePage() {
         items={[
           { label: "Name", options: [userOptions.name] },
           { label: "Email", options: [userOptions.email] },
-          { label: "Primary Language", options: userOptions.primaryLanguage },
-          { label: "Target Language", options: userOptions.targetLanguage },
           { label: "Interests", options: userOptions.interests },
           { label: "Professions", options: userOptions.professions },
         ]}
