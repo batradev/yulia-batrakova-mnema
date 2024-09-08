@@ -127,3 +127,20 @@
   line-height: $m-p3-line-height;
   @include nunito-regular;
 }
+
+@mixin button-style {
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: $blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  @include nunito-regular;
+  
+  
+}
+@mixin button-style-hover {
+  background-color: #354278;
+}

@@ -1,0 +1,81 @@
+@use "../../styles/partials/global" as *;
+
+.user-profile-page {
+  padding: to-rem(40);
+
+  h1 {
+    margin-bottom: to-rem(20);
+    @include h1-style;
+    color: $dark-blue;
+    margin-top: to-rem(62);
+  }
+
+  &__details {
+    margin-bottom: to-rem(20);
+    color: $black;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .modal-content {
+    background-color: $white;
+    padding: to-rem(20);
+    border-radius: to-rem(10);
+    max-height: 80%;
+    overflow-y: auto;
+
+    .modal-list {
+      .modal-item {
+        padding: to-rem(10);
+        border-bottom: to-rem(1) solid #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &.selected {
+          background-color: $violet;
+          color: $white;
+        }
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+    }
+  }
+}
+
+.user-profile-page__field {
+  margin: to-rem(10) 0;
+  cursor: pointer;
+  padding: to-rem(10);
+
+  &:hover {
+    background-color: $grey;
+  }
+}
+
+.user-profile-page__field-info {
+  margin: to-rem(10) 0;
+
+  border-radius: to-rem(5);
+  padding: to-rem(10);
+  transition: background-color 0.3s ease;
+}
+.user-button {
+  @include button-style;
+  margin-top: to-rem(30);
+
+  &:hover {
+    @include button-style-hover;
+  }
+}

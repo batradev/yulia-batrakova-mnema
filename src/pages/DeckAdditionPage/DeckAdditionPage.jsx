@@ -17,7 +17,7 @@ function DeckAdditionPage() {
   useEffect(() => {
     const fetchLanguages = async () => {
       try {
-        const response = await axios.get('https://localhost:8080/api/languages', {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/languages`, {
           withCredentials: true,
         });
         setLanguages(response.data);
@@ -44,7 +44,7 @@ function DeckAdditionPage() {
     }
     try {
       const response = await axios.post(
-        'https://localhost:8080/api/decks',
+        `${process.env.REACT_APP_API_BASE_URL}/api/decks`,
         {
           name: deckName,
           native_language_id: selectedNativeLanguage,
@@ -66,40 +66,33 @@ function DeckAdditionPage() {
   };
 
   return (
-    <div className="deck-addition-page">
-      <h1>Let's create a deck!</h1>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+    <div className="deck-addition">
+      <h1 className="deck-addition__title">Let's create a deck!</h1>
+      {errorMessage && <p className="deck-addition__error-message">{errorMessage}</p>}
       <input
+        className="deck-addition__input"
         type="text"
         placeholder="Name of the deck"
         value={deckName}
         onChange={(e) => setDeckName(e.target.value)}
       />
-      <div className="language-selectors">
-        <div
-          className="language-selector"
-          onMouseEnter={() => setIsNativeLanguageSelector(true)}
-          onClick={() => setIsModalOpen(true)}
-        >
+      <div className="deck-addition__language-selectors">
+        <div className="deck-addition__language-selector" onClick={() => { setIsNativeLanguageSelector(true); setIsModalOpen(true); }}>
           {selectedNativeLanguage ? languages.find(lang => lang.id === selectedNativeLanguage).name : 'language you speak'}
         </div>
-        <div
-          className="language-selector"
-          onMouseEnter={() => setIsNativeLanguageSelector(false)}
-          onClick={() => setIsModalOpen(true)}
-        >
+        <div className="deck-addition__language-selector" onClick={() => { setIsNativeLanguageSelector(false); setIsModalOpen(true); }}>
           {selectedTargetLanguage ? languages.find(lang => lang.id === selectedTargetLanguage).name : 'language you want to learn'}
         </div>
       </div>
      
       {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <div className="language-list">
+        <div className="deck-addition__modal">
+          <div className="deck-addition__modal-content">
+            <div className="deck-addition__language-list">
               {languages.map((language) => (
                 <div
                   key={language.id}
-                  className="language-item"
+                  className="deck-addition__language-item"
                   onClick={() => handleLanguageSelect(language.id)}
                 >
                   {language.name}
@@ -109,7 +102,7 @@ function DeckAdditionPage() {
           </div>
         </div>
       )}
-      <button onClick={handleCreateDeck}>Create</button>
+      <button className="deck-addition__button" onClick={handleCreateDeck}>Create</button>
     </div>
   );
 }

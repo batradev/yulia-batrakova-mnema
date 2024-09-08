@@ -10,7 +10,7 @@ function VisualsPage() {
   useEffect(() => {
     const fetchVisuals = async () => {
       try {
-        const response = await axios.get('https://localhost:8080/api/visuals', {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/visuals`, {
           params: { deck_id: deckId },
           withCredentials: true,
         });
@@ -25,7 +25,6 @@ function VisualsPage() {
 
   return (
     <div className="visuals-page">
-      <h1 className="visuals-page__title">Visuals</h1>
       <div className="visuals-page__content">
         {visuals.map((visual, index) => (
           <div key={index} className="visuals-page__item">
