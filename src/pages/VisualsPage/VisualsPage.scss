@@ -1,0 +1,64 @@
+
+@use '../../styles/partials/global' as *;
+.visuals-page {
+    padding: to-rem(62);
+    max-width: to-rem(1200);
+    margin: 0 auto;
+  
+  
+    &__content {
+      display: flex;
+      flex-direction: column;
+
+      @include tablet {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: to-rem(20);
+      }
+    }
+  
+    &__item {
+      background-color: $white;
+      border-radius: to-rem(8);
+      box-shadow: 0 to-rem(4) to-rem(8) rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      flex: 0 0 30%;
+      margin-bottom: to-rem(20);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: to-rem(10);
+      @include tablet {
+        max-width: 30%;
+      }
+    }
+  
+    &__image {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  
+    &__text {
+      padding: to-rem(10);
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+      margin: to-rem(10) 0;
+    }
+  
+    p {
+      font-size: 1rem;
+      margin:to-rem( 5) 0;
+    }
+  
+    em {
+      color: #666;
+    }
+  }
+  

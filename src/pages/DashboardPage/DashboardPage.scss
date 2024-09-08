@@ -1,0 +1,53 @@
+@use '../../styles/partials/global' as *;
+
+.dashboard {
+  padding: to-rem(20);
+  text-align: center;
+
+  &__title {
+    @include h1-style;
+    color: $dark-blue;
+    margin-top: to-rem(42);
+  }
+
+  &__decks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__deck-card {
+    background-color: $white;
+    border: 1px solid #dee2e6;
+    border-radius: to-rem(10);
+    width: to-rem(150);
+    margin: to-rem(10);
+    padding: to-rem(20);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &-name {
+      @include h2-style;
+      color: $dark-blue;
+    }
+
+    &-count {
+      font-size: to-rem(14);
+      color: #868e96;
+    }
+  }
+
+  &__add-deck-button {
+    @include button-style;
+    margin-top: to-rem(30);
+
+    &:hover {
+      @include button-style-hover;
+    }
+  }
+}

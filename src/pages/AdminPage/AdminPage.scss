@@ -1,0 +1,46 @@
+@use '../../styles/partials/global' as *;
+
+.admin-page {
+  padding: to-rem(40);
+
+  h1 {
+    margin-bottom: to-rem(20);
+    @include h1-style;
+    color: $dark-blue;
+    margin-top: to-rem(62);
+  }
+
+  &__user-list {
+    margin-top: to-rem(20);
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: to-rem(10);
+    border-bottom: to-rem(1) solid #ddd;
+
+    &:hover {
+      background-color: $grey;
+    }
+  }
+
+  &__email {
+    font-size: to-rem(18);
+    color: $black;
+  }
+
+  &__delete-icon {
+    width: to-rem(20);
+    height: to-rem(20);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

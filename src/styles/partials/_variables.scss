@@ -1,0 +1,81 @@
+@use "./functions" as *;
+
+// Fonts
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-family-base: 'Nunito', sans-serif;
+
+// Colors
+$black: #13182C;
+$blue: #6fbff0;
+$white: #FFFFFF;
+$slate: #5C667E;
+$cloud: #BDC5D5;
+$dark-blue: #354278;
+$light-grey: #F7F8F9;
+$red: #C94515;
+$violet: #8c73bd;
+$grey: #e0e0e0;
+
+$gradient-color: linear-gradient(90deg, #470972, #6fbff0, #FF69B4);
+
+
+
+
+// Layout
+$padding-xs: to-rem(4);  
+$padding-sm: to-rem(8);  
+$padding-md: to-rem(16); 
+$padding-lg: to-rem(24); 
+$padding-xl: to-rem(32); 
+$padding-xxl: to-rem(40); 
+$padding-xxxl: to-rem(48);
+
+$border-radius: to-rem(20); 
+
+// Desktop & Tablet Text Styles
+$logo-font-size: to-rem(64);
+
+$h1-font-size: to-rem(32);
+$h1-line-height: to-rem(40);
+
+$h2-font-size: to-rem(24);
+$h2-line-height: to-rem(32);
+
+$h3-font-size: to-rem(14);
+$h3-line-height: to-rem(22);
+
+$h4-font-size: to-rem(12);
+$h4-line-height: to-rem(18);
+
+$p1-font-size: to-rem(16);
+$p1-line-height: to-rem(28);
+
+$p2-font-size: to-rem(14);
+$p2-line-height: to-rem(22);
+
+$p3-font-size: to-rem(12);
+$p3-line-height: to-rem(18);
+
+// Mobile Text Styles
+$m-h1-font-size: to-rem(28);
+$m-h1-line-height: to-rem(36);
+
+$m-h2-font-size: to-rem(20);
+$m-h2-line-height: to-rem(28);
+
+$m-h3-font-size: to-rem(13);
+$m-h3-line-height: to-rem(20);
+
+$m-h4-font-size: to-rem(11);
+$m-h4-line-height: to-rem(16);
+
+$m-p1-font-size: to-rem(15);
+$m-p1-line-height: to-rem(26);
+
+$m-p2-font-size: to-rem(13);
+$m-p2-line-height: to-rem(20);
+
+$m-p3-font-size: to-rem(11);
+$m-p3-line-height: to-rem(16);

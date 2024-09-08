@@ -1,0 +1,49 @@
+@use '../../styles/partials/global' as *;
+
+.selection-page {
+  text-align: center;
+  padding: to-rem(20);
+
+  &__title {
+    @include h1-style;
+    color: $dark-blue;
+    margin-top: to-rem(62);
+    margin-bottom: to-rem(40);
+  }
+
+  &__cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: to-rem(10);
+    justify-content: center;
+    margin: to-rem(20) to-rem(40);
+  }
+
+  &__tag {
+    padding: to-rem(10) to-rem(20);
+    background-color: #e0e0e0;
+    border-radius: to-rem(20);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: to-rem(16);
+    font-weight: 500;
+
+    &--selected {
+      background-color: $violet;
+      color: $white;
+    }
+
+    &:hover {
+      background-color: #c0c0c0;
+    }
+  }
+
+  &__save-button {
+    @include button-style;
+    margin-top: to-rem(30);
+
+    &:hover {
+      @include button-style-hover;
+    }
+  }
+}

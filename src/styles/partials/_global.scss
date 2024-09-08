@@ -1,0 +1,9 @@
+@forward './mixins';
+@forward './variables';
+@forward './functions';
+
+html, body {
+    height: 100%;
+    background-color: #F7F8F9; 
+    margin: 0; 
+  }
