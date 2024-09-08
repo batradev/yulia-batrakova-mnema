@@ -12,7 +12,7 @@ function WordsAdditionPage() {
   const handleSubmit = async () => {
     try {
       const wordsArray = words.split(/[\s,.]+/).filter(Boolean); 
-      const response = await axios.post('https://localhost:8080/api/words', {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/words`, {
         words: wordsArray, 
         deck_id: deckId,
       }, {
@@ -27,13 +27,14 @@ function WordsAdditionPage() {
 
   return (
     <div className="words-addition-page">
-      <h1>Add your words</h1>
+      <h1 className="words-addition-page__title">Add your words</h1>
       <textarea
+       className="words-addition-page__textarea"
         placeholder="Type here"
         value={words}
         onChange={(e) => setWords(e.target.value)}
       />
-      <button onClick={handleSubmit}>Ready</button>
+      <button className="words-addition-page__button" onClick={handleSubmit}>Ready</button>
     </div>
   );
 }

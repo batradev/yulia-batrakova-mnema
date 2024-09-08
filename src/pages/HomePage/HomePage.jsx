@@ -8,14 +8,18 @@ function HomePage() {
   const handleGetStarted = () => {
     navigate('/login');
   };
+
   return (
-    <div>
-      <h1 className="text-gradient">mnema</h1>
-      <p className="welcome-text">
+    <div className="home">
+      <div className="home__container">
+      <span className="home__icon">💡</span> 
+      <h1 className="home__logo text-gradient">mnema</h1>
+      </div>
+      <p className="home__description">
         We turn words into images to make learning easy and effective.
         Experience the full power of mnemonics!
       </p>
-      <button className="get-started-button" onClick={handleGetStarted}>
+      <button className="home__button home__button--get-started" onClick={handleGetStarted}>
         Get Started
       </button>
     </div>

@@ -1,45 +1,51 @@
-@use '../../styles/partials/global' as *;
 
-.professions-cloud {
+  @use '../../styles/partials/global' as *;
+
+.profession-selection {
+  text-align: center;
+  padding: to-rem(20);
+
+  &__title {
+    @include h1-style;
+    color: $dark-blue;
+    margin-top: to-rem(62);
+    margin-bottom: to-rem(40);
+  }
+
+  &__cloud {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: to-rem(10);
     justify-content: center;
-    margin-top: 20px;
+    margin: to-rem(20) to-rem(40);
   }
-  
-  .profession-tag {
-    padding: 10px 20px;
+
+  &__tag {
+    padding: to-rem(10) to-rem(20);
     background-color: #e0e0e0;
-    border-radius: 20px;
+    border-radius: to-rem(20);
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 16px;
+    font-size: to-rem(16);
     font-weight: 500;
+
+    &--selected {
+      background-color: $violet;
+      color: white;
+    }
+
+    &:hover {
+      background-color: #c0c0c0;
+    }
   }
-  
-  .profession-tag.selected {
-    background-color: #b94dcc;
-    color: white;
+
+  &__save-button {
+    @include button-style;
+    margin-top: to-rem(30);
+    margin-bottom: to-rem(30);
+
+    &:hover {
+      @include button-style-hover;
+    }
   }
-  
-  .profession-tag:hover {
-    background-color: #c0c0c0;
-  }
-  
-  button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #b94dcc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #569ed5;
-  }
-  
+}

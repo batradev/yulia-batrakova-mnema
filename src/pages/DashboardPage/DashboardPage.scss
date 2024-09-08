@@ -1,54 +1,53 @@
 @use '../../styles/partials/global' as *;
+
 .dashboard {
-    padding: 20px;
-    text-align: center;
-  
-    .decks-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  
-    .deck-card {
-      background-color: #f8f9fa;
-      border: 1px solid #dee2e6;
-      border-radius: 10px;
-      width: 150px;
-      margin: 10px;
-      padding: 20px;
-      cursor: pointer;
-      transition: transform 0.2s ease-in-out;
-  
-      &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-  
-      h2 {
-        font-size: 18px;
-        color: #343a40;
-      }
-  
-      p {
-        font-size: 14px;
-        color: #868e96;
-      }
-    }
-  
-    button {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #b94dcc;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        font-size: 16px;
-      }
-      
-      button:hover {
-        background-color: #569ed5;
-      }
+  padding: to-rem(20);
+  text-align: center;
+
+  &__title {
+    @include h1-style;
+    color: $dark-blue;
+    margin-top: to-rem(42);
   }
-  
+
+  &__decks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__deck-card {
+    background-color: $white;
+    border: 1px solid #dee2e6;
+    border-radius: to-rem(10);
+    width: to-rem(150);
+    margin: to-rem(10);
+    padding: to-rem(20);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &-name {
+      @include h2-style;
+      color: $dark-blue;
+    }
+
+    &-count {
+      font-size: to-rem(14);
+      color: #868e96;
+    }
+  }
+
+  &__add-deck-button {
+    @include button-style;
+    margin-top: to-rem(30);
+
+    &:hover {
+      @include button-style-hover;
+    }
+  }
+}

@@ -74,7 +74,7 @@ As an admin I want to view all user profiles, edit and delete profiles.
 - Axios for making HTTP requests to GPT API
 - MySQL for storing user data and preferences
 - Knex.js for building SQL queries and managing database migrations
-- [openai](https://github.com/openai/openai-node) npm client package
+- [Openai](https://github.com/openai/openai-node) npm client package
 
 **Authentication:**
 -  Passport.js for managing authentication strategies. Users will log in using their Google accounts.
@@ -111,8 +111,7 @@ Visuals & Download Page: Display generated images, mnemonics, and provide a down
 
 # Data
 
-<img width="1000" alt="sql_mnema" src="https://github.com/user-attachments/assets/a07807f1-8b98-49a5-b9a1-a9c90062b7eb">
-
+![alt text](sql_mnema_4.png)
 
 ### Endpoints
 
@@ -144,10 +143,10 @@ Visuals & Download Page: Display generated images, mnemonics, and provide a down
 ```
 
 
-3. **Select Target Language:**
+3. **Select Target Language:** and **4. Select Primary Language:**
 
-- **Method:** POST
-- **URL:** `/api/settings`
+- **Method:** GET
+- **URL:** `/api/languages`
 - **Request Body:** `{ userId: string, target_language: string }`
 - **Response:**
 
@@ -157,27 +156,15 @@ Visuals & Download Page: Display generated images, mnemonics, and provide a down
   "errors": [],
 }
 ```
-
-
-4. **Select Primary Language:**
-
 - **Method:** POST
-- **URL:** `/api/settings`
-- **Request Body:** `{ userId: string, primary_language: string }`
+- **URL:** `/api/decks`
+- **Request Body:** `{ userId: string, target_language: string }`
 - **Response:**
-
-```
-{
-  "status": "success",
-  "errors": [],
-}
-
-```
 
 5. **Select Interests:**
 
 - **Method:** POST
-- **URL:** `/api/interests`
+- **URL:** `/api/user-interests`
 - **Request Body:** `{ userId: string, interests: [string] }`
 - **Response:**
 
@@ -191,7 +178,7 @@ Visuals & Download Page: Display generated images, mnemonics, and provide a down
 6. **Select Profession:**
 
 - **Method:** POST
-- **URL:** `/api/professions`
+- **URL:** `/api/user-professions`
 - **Request Body:** `{ userId: string, professions: [string] }`
 - **Response:**
 `
@@ -222,8 +209,8 @@ For translations generation will be used [openai](https://github.com/openai/open
 
 8. **Get Mnemonic Descriptions from Backend:**
 
-- **Method:** POST
-- **URL:** `/api/words/:word_id/mnemonics`
+- **Method:** GET
+- **URL:** `/api/results`
 - **Query Parameters:** `{}`
 - **Response:**
 
@@ -239,7 +226,6 @@ For translations generation will be used [openai](https://github.com/openai/open
 }
 
 ```
- 
 
 **Request Mnemonic Descriptions from GPT-4:**
 
@@ -249,7 +235,7 @@ When the frontend sends a request to the backend to get mnemonic descriptions, t
 9. **Get Images from Backend:**
 
 - **Method:** POST
-- **URL:** `/api/words/:word_id/images
+- **URL:** `/api/generate-images
 - **Query Parameters:** `{}`
 - **Response:**
 
@@ -270,7 +256,6 @@ When the frontend sends a request to the backend to get mnemonic descriptions, t
 **Request from Backend to DALL-E API:**
 
 For image generation will be used [openai](https://github.com/openai/openai-node) npm package.
-Example of usage: https://platform.openai.com/docs/guides/images/image-generation.
 
 
 **Additional Endpoints for Profile Management:**
@@ -278,7 +263,7 @@ Example of usage: https://platform.openai.com/docs/guides/images/image-generatio
 10. **User Profile:**
 
 - **Method:** GET
-- **URL:** `/api/users/:id/profile`
+- **URL:** `/api/user-profile`
 - **Response:**
 ```
 {
@@ -321,7 +306,7 @@ Example of usage: https://platform.openai.com/docs/guides/images/image-generatio
 ```
 
 - **Method:** DELETE
-- **URL:** `/api/admin/users/:id`
+- **URL:** `/admin/users/:userId`
 - **Description:** Allows the admin to delete a user profile.
 -  **Response:**
 ```
@@ -355,25 +340,23 @@ Week 1:
 
 Week 2:
 
-**5. Deploy Client and Server**. Deploy the React frontend and Express backend to production (Heroku).
+**5. Implement Google OAuth Login.** Create a button on the login page to redirect to Google OAuth. Implement the `/auth/google` route to handle the OAuth flow. Implement the `/auth/google/callback` route to handle the callback and user session creation.
 
-**6. Implement Google OAuth Login.** Create a button on the login page to redirect to Google OAuth. Implement the `/auth/google` route to handle the OAuth flow. Implement the `/auth/google/callback` route to handle the callback and user session creation.
+**6. Implement User Profile and Admin Profile Management.** Build the user profile page, allowing users to view and edit their profile (name, email), update their language settings, interests, and professions. Implement the corresponding endpoints in Express.
 
-**7. Implement User Profile and Admin Profile Management.** Build the user profile page, allowing users to view and edit their profile (name, email), update their language settings, interests, and professions. Implement the corresponding endpoints in Express.
-
-Build the admin dashboard, allowing the admin to view, edit, and delete user profiles. Create the corresponding endpoints in Express to support these admin functionalities.
+**7. Build the admin dashboard, allowing the admin to view, edit, and delete user profiles.** Create the corresponding endpoints in Express to support these admin functionalities.
 
 Week 3:
 
-**8. Implement Language Selection**. Create pages for selecting target and native languages using React. Set up `POST /api/settings` endpoints in Express.
+**8. Implement Language Selection**. Create pages for selecting target and native languages using React. Set up endpoints in Express.
 
-**9. Implement Interests and Profession Selection**. Build pages for selecting interests and profession using React. Create `POST /api/interests` and `POST /api/professions` endpoints in Express.
+**9. Implement Interests and Profession Selection**. Build pages for selecting interests and profession using React. Create 
 
-**10. Implement Word Submission**. Create a page for entering words and translations using React.  Set up the `POST /api/words` endpoint in Express.
+**10. Implement Word Submission**. Create a page for entering words and translations using React.  
 
-**11. Generate Mnemonic Descriptions**. Add logic in Express to request mnemonic descriptions from GPT-4. Create the `POST /api/words/:word_id/mnemonics` endpoint.  Store descriptions in MySQL.
+**11. Generate Mnemonic Descriptions**. Add logic in Express to request mnemonic descriptions from GPT-4. 
 
-**12. Generate Images with DALL-E**. Add logic in Express to request images from DALL-E based on mnemonic descriptions. Create the `POST /api/words/:word_id/images` endpoint.  Store image URLs in MySQL.
+**12. Generate Images with DALL-E**. Add logic in Express to request images from DALL-E based on mnemonic descriptions. 
 
 **13. Build Results Page**. Create a page in React to display mnemonic descriptions with options to regenerate. Implement functionality to confirm descriptions and create images.
 
@@ -391,7 +374,3 @@ Week 3:
 
 **Audio Pronunciation**: Add audio pronunciation for each word in the user's deck. This can be done by integrating a text-to-speech API or using pre-recorded audio files.
 
-
-# Mockups
-
-![image](https://github.com/user-attachments/assets/01841302-783d-4f86-8015-2b7bc36f571f)

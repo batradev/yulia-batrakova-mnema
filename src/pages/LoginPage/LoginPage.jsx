@@ -1,14 +1,17 @@
 import React from "react";
+import "./LoginPage.scss";
 
 function LoginPage() {
   const handleLogin = () => {
-    window.location.href = "https://localhost:8080/auth/google";
+    window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/google`;
   };
 
   return (
-    <div>
-      <h1>Login to Mnema</h1>
-      <button onClick={handleLogin}>Login with Google</button>
+    <div className="login">
+      <h1 className="login__title">Login to Mnema</h1>
+      <button className="login__button" onClick={handleLogin}>
+        Login with Google
+      </button>
     </div>
   );
 }

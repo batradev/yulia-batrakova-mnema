@@ -1,45 +1,54 @@
-import React from "react";
-import "./AdminPage.scss";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './AdminPage.scss';
+import deleteIcon from '../../assets/icon-delete.svg'; 
 
-import List from "../../components/List/List";
+const AdminPage = () => {
+  const [users, setUsers] = useState([]);
 
-function AdminPage() {
-  const userAccounts = [
-    {
-      label: "Account 1",
-      email: "user1@example.com",
-      details: ["Detail 1", "Detail 2", "Detail 3"],
-    },
-    {
-      label: "Account 2",
-      email: "user2@example.com",
-      details: ["Detail 1", "Detail 2", "Detail 3"],
-    },
-    
-  ];
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/admin/users`, {
+          withCredentials: true,
+        });
+        setUsers(response.data);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+    fetchUsers();
+  }, []);
 
-  const handleDeleteUser = (user) => {
-    console.log("Deleted user:", user);
-  };
-
-  const handleOptionSelect = (option) => {
-    console.log("Selected:", option);
+  const handleDeleteUser = async (userId) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/admin/users/${userId}`, {
+        withCredentials: true,
+      });
+      setUsers(users.filter((user) => user.id !== userId)); 
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
   };
 
   return (
-    <div>
-      <h1>Admin</h1>
-      <List
-        items={userAccounts.map((user) => ({
-          label: user.email,
-          options: user.details,
-        }))}
-        onOptionSelect={handleOptionSelect}
-        onDelete={handleDeleteUser}
-        showDeleteButton={true} 
-      />
+    <div className="admin-page">
+      <h1>Admin Dashboard</h1>
+      <div className="admin-page__user-list">
+        {users.map((user) => (
+          <div key={user.id} className="admin-page__user">
+            <span className="admin-page__email">{user.email}</span>
+            <img
+              src={deleteIcon}
+              alt="Delete"
+              className="admin-page__delete-icon"
+              onClick={() => handleDeleteUser(user.id)}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default AdminPage;

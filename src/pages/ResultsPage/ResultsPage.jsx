@@ -12,7 +12,7 @@ function ResultsPage() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await axios.get('https://localhost:8080/api/results', {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/results`, {
           params: { deck_id: deckId },
           withCredentials: true,
         });
@@ -47,7 +47,7 @@ function ResultsPage() {
       }));
 
     try {
-      const response = await axios.post('https://localhost:8080/api/generate-images', { words: wordsToGenerate }, { withCredentials: true });
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/generate-images`, { words: wordsToGenerate }, { withCredentials: true });
       console.log('Images generated successfully:', response.data);
       navigate(`/visuals/${deckId}`);
     } catch (error) {
@@ -57,7 +57,7 @@ function ResultsPage() {
 
   return (
     <div className="results-page">
-      <h1 className="results-page__title">Results</h1>
+      <h1 className="results-page__title">My Cards</h1>
       <table className="results-page__table">
         <thead>
           <tr>
@@ -70,8 +70,8 @@ function ResultsPage() {
         <tbody>
           {results.map((result, index) => (
             <tr key={index}>
-              <td>{result.word}</td>
-              <td>{result.translation}</td>
+              <td className="results-page__word">{result.word}</td>
+              <td className="results-page__translation">{result.translation}</td>
               <td>{result.mnemonic_desc}</td>
               <td className="results-page__table--checkbox">
                 <input

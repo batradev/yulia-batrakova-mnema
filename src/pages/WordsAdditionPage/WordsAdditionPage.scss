@@ -1,0 +1,33 @@
+@use '../../styles/partials/global' as *;
+
+.words-addition-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    
+
+    &__title {
+        @include h1-style;
+        color: $dark-blue;
+        margin-top: to-rem(62);
+    }
+
+    &__textarea {
+        width: to-rem(400);
+        height: to-rem(200);
+        margin-top: to-rem(20); 
+        @include mobile {
+            width: 82%;
+        }
+    }
+
+    &__button {
+        @include button-style;
+        margin-top: to-rem(30);
+    
+        &:hover {
+            @include button-style-hover;
+        }
+    }
+}

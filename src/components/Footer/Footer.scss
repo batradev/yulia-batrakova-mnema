@@ -1,0 +1,12 @@
+
+@use '../../styles/partials/global' as *;
+
+.footer {
+    text-align: center;
+    padding: to-rem(20);
+    @include p2-style;
+    position: static;
+    bottom: 0;
+    color: $dark-blue;
+  }
+  
