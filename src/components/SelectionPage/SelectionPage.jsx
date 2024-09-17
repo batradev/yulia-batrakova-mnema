@@ -19,7 +19,7 @@ function SelectionPage({ title, fetchUrl, saveUrl, nextPage }) {
 
   useEffect(() => {
     fetchItems();
-  }, []);
+  });
 
   const handleItemClick = (itemId) => {
     setSelectedItems((prevSelected) =>

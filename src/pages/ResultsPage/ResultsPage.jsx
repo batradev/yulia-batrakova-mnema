@@ -41,6 +41,7 @@ function ResultsPage() {
     const wordsToGenerate = results
       .filter(result => selectedWords[result.word])
       .map(result => ({
+        id: result.id,
         word: result.word,
         mnemonic_desc: result.mnemonic_desc,
         translation: result.translation,

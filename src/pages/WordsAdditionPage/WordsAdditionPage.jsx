@@ -12,7 +12,7 @@ function WordsAdditionPage() {
   const handleSubmit = async () => {
     try {
       const wordsArray = words.split(/[\s,.]+/).filter(Boolean); 
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/words`, {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/words`, {
         words: wordsArray, 
         deck_id: deckId,
       }, {
