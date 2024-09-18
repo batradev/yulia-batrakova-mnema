@@ -18,6 +18,12 @@
     color: $dark-blue;
     margin-top: to-rem(62);
   }
+  &__text {
+    @include p1-style;
+    color: $dark-blue;
+    margin-top: to-rem(0);
+    margin-bottom: to-rem(30);
+  }
 
   &__table {
     border-collapse: collapse;

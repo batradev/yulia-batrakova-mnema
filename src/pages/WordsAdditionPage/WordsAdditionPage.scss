@@ -17,7 +17,9 @@
         width: to-rem(400);
         height: to-rem(200);
         margin-top: to-rem(20); 
-        font-size: to-rem(16);
+
+        @include nunito-regular;
+        font-size: to-rem(18);
         @include mobile {
             width: 82%;
         }
