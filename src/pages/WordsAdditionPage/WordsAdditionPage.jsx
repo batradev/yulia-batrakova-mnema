@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Button from "../../components/Button/Button"; 
 import './WordsAdditionPage.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -34,7 +35,11 @@ function WordsAdditionPage() {
         value={words}
         onChange={(e) => setWords(e.target.value)}
       />
-      <button className="words-addition-page__button" onClick={handleSubmit}>Ready</button>
+      <Button 
+        text="Ready" 
+        onClick={handleSubmit} 
+        className="words-addition-page__button"
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Button from "../../components/Button/Button"; 
 import './VisualsPage.scss';
 
 function VisualsPage() {
@@ -39,6 +40,11 @@ function VisualsPage() {
           </div>
         ))}
       </div>
+      <Button 
+        text="Download Deck" 
+        // onClick={handleSubmit} 
+        className="visuals-page__button"
+      />
     </div>
   );
 }

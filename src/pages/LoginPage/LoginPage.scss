@@ -16,7 +16,7 @@
   }
 
   &__button {
-    @include button-style;
+    // @include button-style;
     padding: to-rem(10) to-rem(20);
     margin-top: to-rem(10);
 

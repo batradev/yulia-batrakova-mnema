@@ -4,6 +4,7 @@
     padding: to-rem(62);
     max-width: to-rem(1200);
     margin: 0 auto;
+    text-align: center;
   
   
     &__content {
@@ -59,6 +60,9 @@
   
     em {
       color: #666;
+    }
+    &__button {
+      margin-top: to-rem(30);
     }
   }
   

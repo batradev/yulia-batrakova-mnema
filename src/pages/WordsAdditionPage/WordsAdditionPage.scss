@@ -17,17 +17,13 @@
         width: to-rem(400);
         height: to-rem(200);
         margin-top: to-rem(20); 
+        font-size: to-rem(16);
         @include mobile {
             width: 82%;
         }
     }
 
     &__button {
-        @include button-style;
         margin-top: to-rem(30);
-    
-        &:hover {
-            @include button-style-hover;
-        }
     }
 }

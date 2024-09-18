@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import Button from "../../components/Button/Button"; 
 import './UserProfilePage.scss';
 
 const UserProfilePage = () => {
@@ -125,7 +126,11 @@ const UserProfilePage = () => {
           <strong>Professions: </strong>{professions.join(', ')}
         </div>
       </div>
-      <button className="user-button" onClick={handleUpdateProfile}>Update Profile</button>
+      <Button 
+        text="Update Profile" 
+        onClick={handleUpdateProfile} 
+        className="user-button"
+      />
 
       {isInterestModalOpen && (
         <div className="modal" ref={modalRef}> 
