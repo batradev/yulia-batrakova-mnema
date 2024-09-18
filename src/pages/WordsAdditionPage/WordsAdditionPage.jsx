@@ -22,7 +22,11 @@ function WordsAdditionPage() {
 
       navigate(`/decks/${deckId}/results`);
     } catch (error) {
-      console.error('Error submitting words:', error);
+      if (error.response && error.response.status === 403) {
+        alert(error.response.data.error); 
+      } else {
+        console.error('Error submitting words:', error);
+      }
     }
   };
 
