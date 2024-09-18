@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button/Button";
 import "./DashboardPage.scss";
 
 function DashboardPage() {
@@ -28,7 +29,6 @@ function DashboardPage() {
   const handleAddDeck = async () => {
     try {
       const response = await axios.get(
-        // "https://localhost:8080/api/check-interests"
         `${process.env.REACT_APP_API_BASE_URL}/api/check-interests`,
         {
           withCredentials: true,
@@ -62,14 +62,17 @@ function DashboardPage() {
             onClick={() => handleDeckClick(deck.id)}
           >
             <h2 className="dashboard__deck-card-name">{deck.name}</h2>
-            <p className="dashboard__deck-card-count">{deck.word_count} words</p>
+            <p className="dashboard__deck-card-count">
+              {deck.word_count} words
+            </p>
           </div>
         ))}
       </div>
-
-      <button className="dashboard__add-deck-button" onClick={handleAddDeck}>
-        Add deck
-      </button>
+      <Button
+        text="Add deck"
+        onClick={handleAddDeck}
+        className="dashboard__add-deck-button"
+      />
     </div>
   );
 }

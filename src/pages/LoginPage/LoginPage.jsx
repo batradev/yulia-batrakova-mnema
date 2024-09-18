@@ -1,5 +1,6 @@
 import React from "react";
 import "./LoginPage.scss";
+import Button from "../../components/Button/Button"; 
 
 function LoginPage() {
   const handleLogin = () => {
@@ -9,9 +10,11 @@ function LoginPage() {
   return (
     <div className="login">
       <h1 className="login__title">Login to Mnema</h1>
-      <button className="login__button" onClick={handleLogin}>
-        Login with Google
-      </button>
+      <Button 
+        text="Login with Google" 
+        onClick={handleLogin} 
+        className="login__button" 
+      />
     </div>
   );
 }
