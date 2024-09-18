@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button/Button";
 import "./HomePage.scss";
 
 function HomePage() {
@@ -19,9 +20,11 @@ function HomePage() {
         We turn words into images to make learning easy and effective.
         Experience the full power of mnemonics!
       </p>
-      <button className="home__button home__button--get-started" onClick={handleGetStarted}>
-        Get Started
-      </button>
+      <Button 
+        text="Get Started" 
+        onClick={handleGetStarted} 
+        className="home__button home__button--get-started"
+      />
     </div>
   );
 }

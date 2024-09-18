@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import Button from "../../components/Button/Button"; 
 import './ResultsPage.scss';
 
 function ResultsPage() {
   const [results, setResults] = useState([]);
   const [selectedWords, setSelectedWords] = useState({});
+  const [loading, setLoading] = useState(false);
   const { deckId } = useParams();
   const navigate = useNavigate();
 
@@ -46,6 +48,7 @@ function ResultsPage() {
         mnemonic_desc: result.mnemonic_desc,
         translation: result.translation,
       }));
+      setLoading(true);  
 
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/generate-images`, { words: wordsToGenerate }, { withCredentials: true });
@@ -53,6 +56,9 @@ function ResultsPage() {
       navigate(`/visuals/${deckId}`);
     } catch (error) {
       console.error('Error generating images:', error);
+    }
+    finally {
+      setLoading(false); 
     }
   };
 
@@ -85,7 +91,12 @@ function ResultsPage() {
           ))}
         </tbody>
       </table>
-      <button className="results-page__button" onClick={handleSubmit}>Generate Images</button>
+      <Button 
+        text="Generate Images" 
+        onClick={handleSubmit} 
+        className="results-page__button" 
+        loading={loading}  
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Button from "../../components/Button/Button"; 
 import './DeckAdditionPage.scss';
 
 function DeckAdditionPage() {
@@ -102,7 +103,11 @@ function DeckAdditionPage() {
           </div>
         </div>
       )}
-      <button className="deck-addition__button" onClick={handleCreateDeck}>Create</button>
+      <Button 
+        text="Create" 
+        onClick={handleCreateDeck} 
+        className="deck-addition__button" 
+      />
     </div>
   );
 }

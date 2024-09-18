@@ -94,11 +94,6 @@
   }
 
   &__button {
-    @include button-style;
     margin-top: to-rem(30);
-
-    &:hover {
-      @include button-style-hover;
-    }
   }
 }

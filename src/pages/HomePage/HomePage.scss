@@ -49,14 +49,7 @@
   }
 
   &__button {
-    @include button-style;
     display: flex;
     margin-top: to-rem(20);
-
-    &--get-started {
-      &:hover {
-        @include button-style-hover;
-      }
-    }
   }
 }
