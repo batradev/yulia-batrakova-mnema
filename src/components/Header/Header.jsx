@@ -8,7 +8,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get("https://localhost:8080/logout", {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/logout`, {
         withCredentials: true,
       });
 

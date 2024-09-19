@@ -68,7 +68,6 @@ function ResultsPage() {
         { words: wordsToGenerate },
         { withCredentials: true }
       );
-      console.log("Images generated successfully:", response.data);
       navigate(`/visuals/${deckId}`);
     } catch (error) {
       console.error("Error generating images:", error);
