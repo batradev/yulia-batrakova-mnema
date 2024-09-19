@@ -6,6 +6,7 @@ import './VisualsPage.scss';
 
 function VisualsPage() {
   const [visuals, setVisuals] = useState([]);
+  const [showModal, setShowModal] = useState(false); 
   const { deckId } = useParams();
 
   useEffect(() => {
@@ -23,6 +24,14 @@ function VisualsPage() {
 
     fetchVisuals();
   }, [deckId]);
+
+  const handleDownloadClick = () => {
+    setShowModal(true); 
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false); 
+  };
 
   return (
     <div className="visuals-page">
@@ -42,9 +51,18 @@ function VisualsPage() {
       </div>
       <Button 
         text="Download Deck" 
-        // onClick={handleSubmit} 
+        onClick={handleDownloadClick} 
         className="visuals-page__button"
       />
+
+      {showModal && (
+        <div className="modal">
+          <div className="modal__content">
+            <p>You're using our test version. Soon, you'll be able to download decks for Anki and easily master your vocabulary.</p>
+            <Button text="Close" onClick={handleCloseModal} className="modal__close-button" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
