@@ -17,8 +17,7 @@ function HomePage() {
       <h1 className="home__logo text-gradient">mnema</h1>
       </div>
       <p className="home__description">
-        We turn words into images to make learning easy and effective.
-        Experience the full power of mnemonics!
+        We use mnemonic techniques to create vivid, memorable, and personalized images. Learning words is now easy!
       </p>
       <Button 
         text="Get Started" 
