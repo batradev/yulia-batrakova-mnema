@@ -29,7 +29,7 @@ function DashboardPage() {
     };
 
     fetchDecks();
-  }, [user.id]);
+  }, [user]);
 
   const handleAddDeck = async () => {
     try {

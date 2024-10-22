@@ -28,7 +28,7 @@ function VisualsPage() {
     };
 
     fetchVisuals();
-  }, [user.id, deckId]);
+  }, [user, deckId]);
 
   const handleDownloadClick = () => {
     setShowModal(true);

@@ -36,7 +36,7 @@ function ResultsPage() {
     };
 
     fetchResults();
-  }, [user.id, deckId]);
+  }, [user, deckId]);
 
   const handleCheckboxChange = (word) => {
     const selectedCount = Object.values(selectedWords).filter(Boolean).length;
