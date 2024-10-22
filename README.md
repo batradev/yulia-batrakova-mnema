@@ -53,7 +53,7 @@ As a user, I want to have ability to change my native and target languages, my i
 
 As a user, I want to input words that I want to learn and generate translations, mnemonic descriptions and images for them.
 
-As a user, I want to review the table with generated words, translations, and mnemonic descriptions. If I am not satisfied with a description, I can click a button to regenerate it. Once all descriptions are satisfactory, I can click "Create Images."
+As a user, I want to review the table with generated words, translations, and mnemonic descriptions. 
 
 As a user, I can view the generated images and descriptions, and then download an Anki word list to continue learning offline.
 
@@ -79,7 +79,6 @@ As an admin I want to view all user profiles, edit and delete profiles.
 **Authentication:**
 -  Passport.js for managing authentication strategies. Users will log in using their Google accounts.
 
-
 ### APIs
 
 OpenAI GPT-4 API: For generating mnemonic descriptions based on user input.
@@ -89,234 +88,29 @@ DALL-E API: For generating images to accompany mnemonic descriptions.
 
 Home Page: Introduction and navigation options.
 
-Login Page: The user is redirected to Google for authorization, after which returns to the site.
+Login Page: The user is redirected to Google for authorization and then returns to the site.
 
-User Profile Page: Display Name and Email. Ability to change their native and target languages, their interests and professions.
+User Profile Page: Displays the user's name and email. Users can change their interests and professions.
 
-Admin Page: Manage User Profiles: view all profiles, edit and delete profiles.
+Admin Page: Manage user profiles by viewing all profiles and deleting them.
 
-Language Selection Page: Choose the language to learn.
+Dashboard Page: Displays decks. Users can add and delete decks.
 
-Native Language Selection Page: Choose the native language.
+Deck Addition Page: Enter the deck name. Choose the language you speak and the language you want to learn.
 
 Interests Selection Page: Select personal interests.
 
-Profession Selection Page: Choose or input profession.
+Profession Selection Page: Choose a profession.
 
 Add Words Page: Input words for learning.
 
-Results Page: Display generated words, translations, and mnemonics. Users can regenerate descriptions if needed. Once satisfied, they can click "Create Images."
+Results Page: Displays generated words, translations, and mnemonics.
 
-Visuals & Download Page: Display generated images, mnemonics, and provide a download option for the Anki word list.
+Visuals & Download Page: Displays generated images and mnemonics, and provides a download option for the Anki word list.
 
 # Data
 
-![alt text](sql_mnema_4.png)
-
-### Endpoints
-
-1. **User Login:**
-
-- **Method:** GET
-- **URL:** `/auth/google`
-- **Response:** Redirects to the Google authorization page.
-
-2. **Google Callback:**
-
-- **Method:** GET
-- **URL:** `/auth/google/callback`
-- **Description:** This endpoint will handle the callback from Google after successful authorization. After successful login through Google, the user will be redirected back to the site with an active session.
-- **Response:**
-
-```
-{
-  "status": "success",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": "1234",
-    "name": "John Doe",
-    "email": "johndoe@gmail.com"
-  }
-}
-
-
-```
-
-
-3. **Select Target Language:** and **4. Select Primary Language:**
-
-- **Method:** GET
-- **URL:** `/api/languages`
-- **Request Body:** `{ userId: string, target_language: string }`
-- **Response:**
-
-```
-{
-  "status": "success",
-  "errors": [],
-}
-```
-- **Method:** POST
-- **URL:** `/api/decks`
-- **Request Body:** `{ userId: string, target_language: string }`
-- **Response:**
-
-5. **Select Interests:**
-
-- **Method:** POST
-- **URL:** `/api/user-interests`
-- **Request Body:** `{ userId: string, interests: [string] }`
-- **Response:**
-
-```
-{
-  "status": "success",
-  "errors": [],
-}
-```
-
-6. **Select Profession:**
-
-- **Method:** POST
-- **URL:** `/api/user-professions`
-- **Request Body:** `{ userId: string, professions: [string] }`
-- **Response:**
-`
-```
-{
-  "status": "success",
-  "errors": [],
-}
-```
-
-7. **Submit Words:**
-
-- **Method:** POST
-- **URL:** `/api/words`
-- **Request Body:** `{ words: [string] }`
-- **Response:**
-
-```
-{
-  "data": [{"id": 1234, "word": "to play", "translation": "jouer"}]
-  "status": "success",
- 
-}
-
-```
-
-For translations generation will be used [openai](https://github.com/openai/openai-node) npm package.
-
-8. **Get Mnemonic Descriptions from Backend:**
-
-- **Method:** GET
-- **URL:** `/api/results`
-- **Query Parameters:** `{}`
-- **Response:**
-
-```
-{
-  "data": 
-    {
-      "word_id": "1234",
-      "mnemonic": "Imagine a jaguar playing soccer on a field. The jaguar is skillfully dribbling the ball, surrounded by a stadium filled with cheering fans."
-    },
-
-  "status": "success",
-}
-
-```
-
-**Request Mnemonic Descriptions from GPT-4:**
-
-When the frontend sends a request to the backend to get mnemonic descriptions, the backend will make a request to the GPT-4 API. For descriptions generation will be used [openai](https://github.com/openai/openai-node) npm package.
-
-
-9. **Get Images from Backend:**
-
-- **Method:** POST
-- **URL:** `/api/generate-images
-- **Query Parameters:** `{}`
-- **Response:**
-
-```
-{
-  "images": [
-    {
-      "word_id": "1234",
-      "url": "/assets/images/image1234.jpg"
-    }
-  ],
-  "status": "success"
-}
-
-```
-
-
-**Request from Backend to DALL-E API:**
-
-For image generation will be used [openai](https://github.com/openai/openai-node) npm package.
-
-
-**Additional Endpoints for Profile Management:**
-
-10. **User Profile:**
-
-- **Method:** GET
-- **URL:** `/api/user-profile`
-- **Response:**
-```
-{
-  "user": {
-    "id": "1234",
-    "name": "John Doe",
-    "email": "johndoe@gmail.com",
-    "target_language": "French",
-    "primary_language": "English",
-    "interests": ["soccer"],
-    "professions": ["soccer player"]
-  },
-  "status": "success"
-}
-
-```
-
-11. **Admin Profile Management:**
-
-- **Method:** GET
-- **URL:** `/api/admin/users`
-- **Response:**
-```
-{
-  "users": [
-    {
-      "id": "1234",
-      "name": "John Doe",
-      "email": "johndoe@gmail.com"
-    },
-    {
-      "id": "5678",
-      "name": "Jane Smith",
-      "email": "janesmith@gmail.com"
-    }
-  ],
-  "status": "success"
-}
-
-```
-
-- **Method:** DELETE
-- **URL:** `/admin/users/:userId`
-- **Description:** Allows the admin to delete a user profile.
--  **Response:**
-```
-{
-  "status": "success",
-  "message": "User profile deleted successfully."
-}
-
-```
-
+![alt text](sql_mnema.png)
 
 ### Auth
 
@@ -325,52 +119,70 @@ For image generation will be used [openai](https://github.com/openai/openai-node
 - Upon successful authentication, Google will return a token that Passport.js will use to create or update the user session.
 - User information will be stored in the session, and no manual token management (like JWT) will be required.
 
+## Installation and Setup
 
-### Roadmap
+### Backend Setup
 
-Week 1:
+ The backend repository is available at [yulia-batrakova-mnema-server](https://github.com/batradev/yulia-batrakova-mnema-server). After cloning, copy the `.env.sample` file to `.env` and fill it with your environment variables (such as database credentials, API keys, etc.).
 
-**1. Create Client project**. Set up the React project with initial routes and pages. Use React Router for navigation.
+1. Navigate to the backend project directory:
+   ```bash
+   cd yulia-batrakova-mnema-server
+   ```
+   
+2. Install the required dependencies:
+   ```bash
+   npm install
+   ```
+   
+3. Start the backend server:
+   ```bash
+   npm start
+   ```
+   The backend will be accessible at `http://localhost:8080` by default.
 
-**2. Create Server project**. Set up the Express server with basic routes. Use Node.js with Express for server-side logic and API handling.
+### Frontend Setup
 
-**3. Set Up Database Migrations**. Define the database schema using Knex.js to create the necessary tables in MySQL: users, interests, professions, words, users_words.
+After cloning, copy the `.env.sample` file to `.env` and fill it with your environment variables.
 
-**4. Seed Database**. Populate the MySQL database with sample data (languages, interests, professions) using Knex.js.
+1. Navigate to the frontend project directory:
+   ```bash
+   cd yulia-batrakova-brainflix
+   ```
 
-Week 2:
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
-**5. Implement Google OAuth Login.** Create a button on the login page to redirect to Google OAuth. Implement the `/auth/google` route to handle the OAuth flow. Implement the `/auth/google/callback` route to handle the callback and user session creation.
+3. Start the frontend application:
+   ```bash
+   npm start
+   ```
 
-**6. Implement User Profile and Admin Profile Management.** Build the user profile page, allowing users to view and edit their profile (name, email), update their language settings, interests, and professions. Implement the corresponding endpoints in Express.
+   The frontend will run at `http://localhost:3000`.
 
-**7. Build the admin dashboard, allowing the admin to view, edit, and delete user profiles.** Create the corresponding endpoints in Express to support these admin functionalities.
+### Prerequisites
 
-Week 3:
+- Make sure the backend server is running before starting the frontend.
+- Ensure that Node.js and npm are installed on your machine.
 
-**8. Implement Language Selection**. Create pages for selecting target and native languages using React. Set up endpoints in Express.
+### API Configuration
 
-**9. Implement Interests and Profession Selection**. Build pages for selecting interests and profession using React. Create 
+If the backend server is running on a different port or URL, update the base API URL in the frontend code to match the running backend instance. By default, the frontend expects the backend to be running at `http://localhost:8080`.
 
-**10. Implement Word Submission**. Create a page for entering words and translations using React.  
 
-**11. Generate Mnemonic Descriptions**. Add logic in Express to request mnemonic descriptions from GPT-4. 
+## Planned Improvements
 
-**12. Generate Images with DALL-E**. Add logic in Express to request images from DALL-E based on mnemonic descriptions. 
+**Cloud Storage for Images**: Store generated images securely in cloud storage to ensure scalability and easy access.
 
-**13. Build Results Page**. Create a page in React to display mnemonic descriptions with options to regenerate. Implement functionality to confirm descriptions and create images.
+**Add Download functionality**: Use Python with `genanki` to generate Anki packages (.csv/.apkg files). Create the `GET /api/download` endpoint in Express.
 
-**14. Build Visuals Page**. Create a page in React to display images and mnemonic descriptions. 
+**Image Generation Optimization**: Generate images in batches and use background jobs to optimize cost and user experience (using OpenAI batch API).
 
-**15. Fix Bugs and Optimize**. Identify and fix bugs, optimizing performance across the React frontend and Express backend.
-
-## Nice-to-haves
-
-**Add Download functionality**. Use Python with `genanki` to generate Anki packages (.csv/.apkg files). Create the `GET /api/download` endpoint in Express.
-
-**Creating and storing a few custom decks by the user.**
+**Implement email notifications** to notify users that their images are generated.
+**Add Audio Pronunciation: Integrate text-to-speech API to provide pronunciation for each word in the user’s deck.
 
 **Pre-built Decks**: Provide users with ready-made decks of flashcards on specific themes (e.g., travel, food, basic phrases). This allows users to start learning immediately without waiting for image generation.
 
-**Audio Pronunciation**: Add audio pronunciation for each word in the user's deck. This can be done by integrating a text-to-speech API or using pre-recorded audio files.
 

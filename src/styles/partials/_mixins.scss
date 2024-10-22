@@ -33,10 +33,10 @@
 }
 
 @mixin nunito-bold {
-    font-family: $font-family-base;
-    font-weight: $font-weight-bold;
-    font-style: bold;
-  }
+  font-family: $font-family-base;
+  font-weight: $font-weight-bold;
+  font-style: bold;
+}
 
 @mixin logo-style {
   font-size: $logo-font-size;
@@ -129,17 +129,15 @@
 }
 
 @mixin button-style {
-  font-size: 16px;
-  padding: 10px 20px;
+  font-size: to-rem(16);
+  padding: to-rem(10) to-rem(20);
   background-color: $blue;
-  color: white;
+  color: $white;
   border: none;
-  border-radius: 5px;
+  border-radius: to-rem(5);
   cursor: pointer;
   transition: background-color 0.3s ease;
   @include nunito-regular;
-  
-  
 }
 @mixin button-style-hover {
   background-color: #354278;

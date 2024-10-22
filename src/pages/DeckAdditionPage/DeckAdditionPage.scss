@@ -1,55 +1,64 @@
-@use '../../styles/partials/global' as *;
+@use "../../styles/partials/global" as *;
 
 .deck-addition {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   &__title {
     @include h1-style;
     color: $dark-blue;
     margin-top: to-rem(62);
-    margin-bottom: to-rem(20);
+    margin-bottom: $padding-lg;
+  }
+  &__language-title {
+    @include p1-style;
+    color: $dark-blue;
+    margin-top: to-rem(0);
+    margin-left: 1.25rem;
+    margin-bottom: 0.5rem;
+    @include mobile {
+      margin-top: 1rem;
+    }
   }
 
   &__input {
     padding: to-rem(10) to-rem(20);
-    border: 1px solid #ccc;
+    border: 1px solid $gray-input;
     border-radius: to-rem(5);
     transition: background-color 0.3s ease;
-    margin-bottom: to-rem(20);
+    margin-bottom: $padding-lg;
   }
 
   &__error-message {
     color: $red;
-    margin-bottom: to-rem(20);
+    margin-bottom: $padding-lg;
   }
 
   &__language-selectors {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+
     @include tablet {
       display: flex;
-    flex-direction: row;
+      flex-direction: row;
     }
   }
 
   &__language-selector {
     padding: to-rem(10) to-rem(20);
-    border: 1px solid #ccc;
+    border: 1px solid $gray-input;
     border-radius: to-rem(5);
     cursor: pointer;
     transition: background-color 0.3s ease;
     background-color: $white;
     margin: 0 to-rem(20);
-    width: 196px;
+    width: to-rem(202);
     @include mobile {
-      
-      margin-top: 10px;
-      margin-left: 20px;
-      margin-right: 20px;
+      margin-top: to-rem(10);
+      margin-left: $padding-lg;
+      margin-right: $padding-lg;
     }
 
     &:hover {
@@ -84,12 +93,12 @@
 
   &__language-item {
     padding: to-rem(10);
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $neutral-gray;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #f0f0f0;
+      background-color: $gray-soft-light;
     }
   }
 

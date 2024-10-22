@@ -1,23 +1,21 @@
-@use '../../styles/partials/global' as *;
+@use "../../styles/partials/global" as *;
 
 .login {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: to-rem(20);
+  padding: $padding-lg;
   padding-top: to-rem(170);
-  
 
   &__title {
     @include h1-style;
     color: $dark-blue;
-    margin-bottom: to-rem(20);
+    margin-bottom: to-rem(18);
   }
 
   &__button {
     padding: to-rem(10) to-rem(20);
     margin-top: to-rem(10);
-
   }
 }

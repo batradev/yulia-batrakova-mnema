@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import Button from "../../components/Button/Button"; 
-import './UserProfilePage.scss';
+import React, { useState, useEffect, useRef, useContext } from "react";
+import axios from "axios";
+import { UserContext } from "../../context/UserProvider";
+import "./UserProfilePage.scss";
 
 const UserProfilePage = () => {
   const [userData, setUserData] = useState({});
@@ -12,100 +12,172 @@ const UserProfilePage = () => {
   const [isInterestModalOpen, setIsInterestModalOpen] = useState(false);
   const [isProfessionModalOpen, setIsProfessionModalOpen] = useState(false);
 
-  const interestModalRef = useRef(null);  
-  const professionModalRef = useRef(null); 
-  const modalRef = useRef(null);  
+  const interestModalRef = useRef(null);
+  const professionModalRef = useRef(null);
+  const modalRef = useRef(null);
+
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (user) {
+      setUserData(user);
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchUserData = async () => {
+      if (!userData.id) {
+        return;
+      }
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user-profile`, {
-          withCredentials: true,
-        });
-        setUserData(response.data.user);
-        setInterests(response.data.interests);
-        setProfessions(response.data.professions);
+        const interestsResponse = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/api/users/${userData.id}/interests`,
+          {
+            withCredentials: true,
+          }
+        );
+        setInterests(interestsResponse.data.interests);
+
+        const professionsResponse = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/api/users/${userData.id}/professions`,
+          {
+            withCredentials: true,
+          }
+        );
+        setProfessions(professionsResponse.data.professions);
       } catch (error) {
-        console.error('Error loading user data:', error);
+        console.error("Error loading user data:", error);
       }
     };
-    fetchUserData();
-  }, []);
 
-  const handleUpdateProfile = async () => {
+    fetchUserData();
+  }, [userData]);
+
+  const fetchAllInterests = async () => {
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/api/user-profile-update`,
-        {
-          interests,  
-          professions, 
-        },
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/api/interests`,
         {
           withCredentials: true,
         }
       );
-      alert('Profile updated successfully!');
-    } catch (error) {
-      console.error('Error updating profile:', error);
-    }
-  };
-
-  const fetchAllInterests = async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/interests`, {
-        withCredentials: true,
-      });
       setAllInterests(response.data);
       setIsInterestModalOpen(true);
     } catch (error) {
-      console.error('Error loading interests:', error);
+      console.error("Error loading interests:", error);
     }
   };
 
   const fetchAllProfessions = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/professions`, {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/api/professions`,
+        {
+          withCredentials: true,
+        }
+      );
       setAllProfessions(response.data);
       setIsProfessionModalOpen(true);
     } catch (error) {
-      console.error('Error loading professions:', error);
+      console.error("Error loading professions:", error);
     }
   };
 
- 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         modalRef.current &&
-        !interestModalRef.current?.contains(event.target) && 
-        !professionModalRef.current?.contains(event.target) 
+        !interestModalRef.current?.contains(event.target) &&
+        !professionModalRef.current?.contains(event.target)
       ) {
         setIsInterestModalOpen(false);
         setIsProfessionModalOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isInterestModalOpen, isProfessionModalOpen]);
 
-  const handleInterestSelect = (interestId) => {
-    if (interests.includes(interestId)) {
-      setInterests(interests.filter((id) => id !== interestId));
+  const handleInterestSelect = async (interestId, interestName) => {
+    let updatedInterests;
+    if (interests.includes(interestName)) {
+      updatedInterests = interests.filter((name) => name !== interestName);
+      setInterests(updatedInterests);
+
+      try {
+        await axios.delete(
+          `${process.env.REACT_APP_API_BASE_URL}/api/users/${userData.id}/interests/${interestId}`,
+          {
+            withCredentials: true,
+          }
+        );
+      } catch (error) {
+        console.error("Error removing interest:", error);
+      }
     } else {
-      setInterests([...interests, interestId]);
+      updatedInterests = [...interests, interestName];
+      setInterests(updatedInterests);
+
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API_BASE_URL}/api/users/${userData.id}/interests`,
+          {
+            items: updatedInterests.map(
+              (interest) =>
+                allInterests.find((item) => item.name === interest)?.id
+            ),
+          },
+          {
+            withCredentials: true,
+          }
+        );
+      } catch (error) {
+        console.error("Error adding interest:", error);
+      }
     }
   };
 
-  const handleProfessionSelect = (professionId) => {
-    if (professions.includes(professionId)) {
-      setProfessions(professions.filter((id) => id !== professionId));
+  const handleProfessionSelect = async (professionId, professionName) => {
+    let updatedProfessions;
+    if (professions.includes(professionName)) {
+      updatedProfessions = professions.filter(
+        (name) => name !== professionName
+      );
+      setProfessions(updatedProfessions);
+
+      try {
+        await axios.delete(
+          `${process.env.REACT_APP_API_BASE_URL}/api/users/${userData.id}/professions/${professionId}`,
+          {
+            withCredentials: true,
+          }
+        );
+      } catch (error) {
+        console.error("Error removing profession:", error);
+      }
     } else {
-      setProfessions([...professions, professionId]);
+      updatedProfessions = [...professions, professionName];
+      setProfessions(updatedProfessions);
+
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API_BASE_URL}/api/users/${userData.id}/professions`,
+          {
+            items: updatedProfessions.map(
+              (profession) =>
+                allProfessions.find((item) => item.name === profession)?.id
+            ),
+          },
+          {
+            withCredentials: true,
+          }
+        );
+      } catch (error) {
+        console.error("Error adding profession:", error);
+      }
     }
   };
 
@@ -114,34 +186,37 @@ const UserProfilePage = () => {
       <h1>User Profile</h1>
       <div className="user-profile-page__details">
         <div className="user-profile-page__field-info">
-          <strong>Name: </strong>{userData.name}
+          <strong>Name: </strong>
+          {userData.name}
         </div>
         <div className="user-profile-page__field-info">
-          <strong>Email: </strong>{userData.email}
+          <strong>Email: </strong>
+          {userData.email}
         </div>
         <div className="user-profile-page__field" onClick={fetchAllInterests}>
-          <strong>Interests: </strong>{interests.join(', ')}
+          <strong>Interests: </strong>
+          {interests.join(", ")}
         </div>
         <div className="user-profile-page__field" onClick={fetchAllProfessions}>
-          <strong>Professions: </strong>{professions.join(', ')}
+          <strong>Professions: </strong>
+          {professions.join(", ")}
         </div>
       </div>
-      <Button 
-        text="Update Profile" 
-        onClick={handleUpdateProfile} 
-        className="user-button"
-      />
 
       {isInterestModalOpen && (
-        <div className="modal" ref={modalRef}> 
+        <div className="modal" ref={modalRef}>
           <div className="modal-content" ref={interestModalRef}>
             <h2>Select Interests</h2>
             <div className="modal-list">
               {allInterests.map((interest) => (
                 <div
                   key={interest.id}
-                  className={`modal-item ${interests.includes(interest.name) ? 'selected' : ''}`}
-                  onClick={() => handleInterestSelect(interest.name)}
+                  className={`modal-item ${
+                    interests.includes(interest.name) ? "selected" : ""
+                  }`}
+                  onClick={() =>
+                    handleInterestSelect(interest.id, interest.name)
+                  }
                 >
                   {interest.name}
                 </div>
@@ -152,15 +227,19 @@ const UserProfilePage = () => {
       )}
 
       {isProfessionModalOpen && (
-        <div className="modal" ref={modalRef}> 
+        <div className="modal" ref={modalRef}>
           <div className="modal-content" ref={professionModalRef}>
             <h2>Select Professions</h2>
             <div className="modal-list">
               {allProfessions.map((profession) => (
                 <div
                   key={profession.id}
-                  className={`modal-item ${professions.includes(profession.name) ? 'selected' : ''}`}
-                  onClick={() => handleProfessionSelect(profession.name)}
+                  className={`modal-item ${
+                    professions.includes(profession.name) ? "selected" : ""
+                  }`}
+                  onClick={() =>
+                    handleProfessionSelect(profession.id, profession.name)
+                  }
                 >
                   {profession.name}
                 </div>
