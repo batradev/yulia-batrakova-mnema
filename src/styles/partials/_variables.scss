@@ -13,25 +13,29 @@ $white: #FFFFFF;
 $slate: #5C667E;
 $cloud: #BDC5D5;
 $dark-blue: #354278;
+$dark-blue-header: #1c3d5a;
 $light-grey: #F7F8F9;
 $red: #C94515;
 $violet: #8c73bd;
 $grey: #e0e0e0;
-
+$neutral-gray: #ddd;
+$gray-soft-light: #f0f0f0;
+$light-gray-border: #dee2e6;
+$gray-medium: #868e96;
+$gray-hover: #c0c0c0;
+$gray-input: #ccc;
+$gray-words: #666;
 $gradient-color: linear-gradient(90deg, #470972, #6fbff0, #FF69B4);
-
-
 
 
 // Layout
 $padding-xs: to-rem(4);  
 $padding-sm: to-rem(8);  
 $padding-md: to-rem(16); 
-$padding-lg: to-rem(24); 
+$padding-lg: to-rem(20); 
 $padding-xl: to-rem(32); 
 $padding-xxl: to-rem(40); 
 $padding-xxxl: to-rem(48);
-
 $border-radius: to-rem(20); 
 
 // Desktop & Tablet Text Styles

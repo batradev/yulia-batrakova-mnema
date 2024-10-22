@@ -1,31 +1,39 @@
-@use '../../styles/partials/global' as *;
+@use "../../styles/partials/global" as *;
 
 .words-addition-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    &__title {
-        @include h1-style;
-        color: $dark-blue;
-        margin-top: to-rem(62);
+  &__title {
+    @include h1-style;
+    color: $dark-blue;
+    margin-top: to-rem(62);
+  }
+  &__instruction {
+    @include p1-style;
+    color: $dark-blue;
+    margin-top: to-rem(0);
+    margin-bottom: 0.5rem;
+    @include mobile {
+      width: 82%;
     }
+  }
 
-    &__textarea {
-        width: to-rem(400);
-        height: to-rem(200);
-        margin-top: to-rem(20); 
+  &__textarea {
+    width: 29rem;
+    height: to-rem(200);
+    margin-top: to-rem(20);
 
-        @include nunito-regular;
-        font-size: to-rem(18);
-        @include mobile {
-            width: 82%;
-        }
+    @include nunito-regular;
+    font-size: to-rem(18);
+    @include mobile {
+      width: 82%;
     }
+  }
 
-    &__button {
-        margin-top: to-rem(30);
-    }
+  &__button {
+    margin-top: to-rem(30);
+  }
 }

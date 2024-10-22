@@ -2,7 +2,7 @@
 
 .selection-page {
   text-align: center;
-  padding: to-rem(20);
+  padding: $padding-lg;
 
   &__title {
     @include h1-style;
@@ -21,8 +21,8 @@
 
   &__tag {
     padding: to-rem(10) to-rem(20);
-    background-color: #e0e0e0;
-    border-radius: to-rem(20);
+    background-color: $grey;
+    border-radius: $padding-lg;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: to-rem(16);
@@ -34,16 +34,11 @@
     }
 
     &:hover {
-      background-color: #c0c0c0;
+      background-color: $gray-hover;
     }
   }
 
   &__save-button {
-    // @include button-style;
     margin-top: to-rem(30);
-
-    // &:hover {
-    //   @include button-style-hover;
-    // }
   }
 }
