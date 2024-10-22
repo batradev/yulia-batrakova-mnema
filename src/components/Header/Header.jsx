@@ -30,7 +30,7 @@ const Header = () => {
     };
 
     fetchUserRole();
-  }, []);
+  }, [userData.id]);
 
   const handleLogout = async () => {
     try {
