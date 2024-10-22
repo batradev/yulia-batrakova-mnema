@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../context/UserProvider";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
@@ -10,22 +11,22 @@ function ResultsPage() {
   const [loading, setLoading] = useState(false);
   const { deckId } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
-  const maxSelectedWords = 5; 
-
+  const maxSelectedWords = 5;
   useEffect(() => {
     const fetchResults = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/results`,
+          `${process.env.REACT_APP_API_BASE_URL}/api/users/${user.id}/decks/${deckId}/words`,
           {
-            params: { deck_id: deckId },
+            params: { type: "results" },
             withCredentials: true,
           }
         );
         const initialSelection = {};
         response.data.forEach((word) => {
-          initialSelection[word.word] = false;
+          initialSelection[word.word] = true;
         });
         setResults(response.data);
         setSelectedWords(initialSelection);
@@ -41,11 +42,13 @@ function ResultsPage() {
     const selectedCount = Object.values(selectedWords).filter(Boolean).length;
 
     if (selectedCount >= maxSelectedWords && !selectedWords[word]) {
-      alert(`You can select up to ${maxSelectedWords} words only. This is a temporary limit in the test version, and we are working on improvements!`);
+      alert(
+        `You can select up to ${maxSelectedWords} words only. This is a temporary limit in the test version, and we are working on improvements!`
+      );
       return;
     }
 
-    setSelectedWords(prevState => ({
+    setSelectedWords((prevState) => ({
       ...prevState,
       [word]: !prevState[word],
     }));
@@ -64,11 +67,11 @@ function ResultsPage() {
 
     try {
       await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/api/generate-images`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/${user.id}/decks/${deckId}/words/generate-images`,
         { words: wordsToGenerate },
         { withCredentials: true }
       );
-      navigate(`/visuals/${deckId}`);
+      navigate(`/decks/${deckId}/visuals`);
     } catch (error) {
       console.error("Error generating images:", error);
     } finally {
@@ -80,7 +83,8 @@ function ResultsPage() {
     <div className="results-page">
       <h1 className="results-page__title">My Cards</h1>
       <p className="results-page__text">
-      Please select no more than 5 words to generate images at once. This limit is part of our test version.
+        Please select no more than 5 words to generate images at once. This
+        limit is part of our test version.
       </p>
       <table className="results-page__table">
         <thead>

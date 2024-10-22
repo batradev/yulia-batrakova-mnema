@@ -1,7 +1,7 @@
 @use "../../styles/partials/global" as *;
 
 .results-page {
-  padding: to-rem(20);
+  padding: $padding-lg;
   max-width: to-rem(1200);
   margin: 0 to-rem(20);
   display: flex;
@@ -27,7 +27,7 @@
 
   &__table {
     border-collapse: collapse;
-    margin-bottom: to-rem(20);
+    margin-bottom: $padding-lg;
     thead {
       @include mobile {
         display: none;
@@ -44,7 +44,7 @@
     td {
       padding: to-rem(12) to-rem(15);
       text-align: left;
-      border-bottom: to-rem(1) solid #ddd;
+      border-bottom: to-rem(1) solid $neutral-gray;
     }
 
     th {

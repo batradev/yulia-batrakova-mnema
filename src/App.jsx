@@ -6,7 +6,7 @@ import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import UserProfilePage from "./pages/UserProfilePage/UserProfilePage";
-import AdminPage from "./pages/AdminPage/AdminPage";
+import UsersPage from "./pages/UsersPage/UsersPage";
 import InterestsSelectionPage from "./pages/InterestsSelectionPage/InterestsSelectionPage";
 import ProfessionSelectionPage from "./pages/ProfessionSelectionPage/ProfessionSelectionPage";
 import DeckAdditionPage from "./pages/DeckAdditionPage/DeckAdditionPage";
@@ -29,7 +29,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/user-profile" element={<UserProfilePage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/users" element={<UsersPage />} />
           <Route
             path="/interests-selection"
             element={<InterestsSelectionPage />}
@@ -44,7 +44,7 @@ function App() {
             element={<WordsAdditionPage />}
           />
           <Route path="/decks/:deckId/results" element={<ResultsPage />} />
-          <Route path="/visuals/:deckId" element={<VisualsPage />} />
+          <Route path="/decks/:deckId/visuals" element={<VisualsPage />} />
         </Routes>
       </main>
       <Footer />
@@ -59,5 +59,3 @@ function AppWrapper() {
   );
 }
 export default AppWrapper;
-
-

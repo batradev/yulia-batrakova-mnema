@@ -1,17 +1,17 @@
-@use '../../styles/partials/global' as *;
+@use "../../styles/partials/global" as *;
 
-.admin-page {
+.users-page {
   padding: to-rem(40);
 
   h1 {
-    margin-bottom: to-rem(20);
+    margin-bottom: $padding-lg;
     @include h1-style;
     color: $dark-blue;
     margin-top: to-rem(62);
   }
 
   &__user-list {
-    margin-top: to-rem(20);
+    margin-top: $padding-lg;
     display: flex;
     flex-direction: column;
   }
@@ -21,7 +21,7 @@
     justify-content: space-between;
     align-items: center;
     padding: to-rem(10);
-    border-bottom: to-rem(1) solid #ddd;
+    border-bottom: to-rem(1) solid $neutral-gray;
 
     &:hover {
       background-color: $grey;
@@ -34,8 +34,8 @@
   }
 
   &__delete-icon {
-    width: to-rem(20);
-    height: to-rem(20);
+    width: $padding-lg;
+    height: $padding-lg;
     cursor: pointer;
     transition: opacity 0.3s ease;
 

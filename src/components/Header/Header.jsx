@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../context/UserProvider";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Header.scss";
@@ -7,13 +8,22 @@ const Header = () => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const [userData, setUserData] = useState({});
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (user) {
+      setUserData(user);
+    }
+  }, [user]);
+
   useEffect(() => {
     const fetchUserRole = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/user-role`, {
+          const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/${userData.id}`, {
           withCredentials: true,
         });
-        setIsAdmin(response.data.is_admin); 
+        setIsAdmin(response.data.user.is_admin); 
       } catch (error) {
         console.error("Error fetching user role:", error);
       }
@@ -47,7 +57,7 @@ const Header = () => {
       <nav className="header__nav">
         {isAdmin && (
           <NavLink
-            to="/admin"
+            to="/users"
             className={({ isActive }) => 
               isActive ? "header__link header__link--active" : "header__link"
             }

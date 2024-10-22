@@ -1,4 +1,4 @@
-@use '../../styles/partials/global' as *;
+@use "../../styles/partials/global" as *;
 
 .home {
   padding-top: to-rem(10);
@@ -12,16 +12,16 @@
   }
   &__icon {
     margin-right: to-rem(5);
-    font-size: to-rem(38); 
-    display: flex;    
+    font-size: to-rem(38);
+    display: flex;
     align-items: center;
   }
   &__logo {
     @include logo-style;
     width: 100%;
     display: flex;
-    margin-bottom: to-rem(10);
-    justify-content: center; 
+    margin-bottom: to-rem(0);
+    justify-content: center;
     background: $gradient-color;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -29,7 +29,7 @@
     margin-top: 0;
 
     @include tablet {
-      background: linear-gradient(181deg, #470972, #6fbff0, #FF69B4);
+      background: linear-gradient(181deg, #470972, #6fbff0, #ff69b4);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -50,6 +50,6 @@
 
   &__button {
     display: flex;
-    margin-top: to-rem(20);
+    margin-top: $padding-lg;
   }
 }

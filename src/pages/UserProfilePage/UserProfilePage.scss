@@ -4,14 +4,14 @@
   padding: to-rem(40);
 
   h1 {
-    margin-bottom: to-rem(20);
+    margin-bottom: $padding-lg;
     @include h1-style;
     color: $dark-blue;
     margin-top: to-rem(62);
   }
 
   &__details {
-    margin-bottom: to-rem(20);
+    margin-bottom: $padding-lg;
     color: $black;
   }
 }
@@ -29,7 +29,7 @@
 
   .modal-content {
     background-color: $white;
-    padding: to-rem(20);
+    padding: $padding-lg;
     border-radius: to-rem(10);
     max-height: 80%;
     overflow-y: auto;
@@ -37,7 +37,7 @@
     .modal-list {
       .modal-item {
         padding: to-rem(10);
-        border-bottom: to-rem(1) solid #ddd;
+        border-bottom: to-rem(1) solid $neutral-gray;
         cursor: pointer;
         transition: background-color 0.3s ease;
 
@@ -47,7 +47,7 @@
         }
 
         &:hover {
-          background-color: #f0f0f0;
+          background-color: $gray-soft-light;
         }
       }
     }
